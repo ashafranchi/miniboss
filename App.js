@@ -1,21 +1,138 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
 
-export default function App() {
+import * as React from 'react';
+import {
+  Button,
+  View,
+  Text,
+  TouchableOpacity,
+  Image
+} from 'react-native';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+import FirstPage from './screens/FirstPage';
+import SecondPage from './screens/SecondPage';
+import ThirdPage from './screens/ThirdPage';
+import FourthPage from './screens/FourthPage';
+import FifthPage from './screens/FifthPage';
+
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+
+function firstScreenStack({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <Stack.Navigator
+        initialRouteName="FirstPage"
+      >
+        <Stack.Screen
+          name="FirstPage"
+          component={FirstPage}
+          options={{ title: 'Home' }}
+        />
+      </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function secondScreenStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="SecondPage"
+    >
+      <Stack.Screen
+        name="SecondPage"
+        component={SecondPage}
+        options={{ title: 'List' }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function thirdScreenStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="ThirdPage"
+    >
+      <Stack.Screen
+        name="ThirdPage"
+        component={ThirdPage}
+        options={{ title: 'Map' }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function fourthScreenStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="FourthPage"
+      screenOptions={{
+        headerShown: false
+      }}
+    >
+      <Stack.Screen
+        name="FourthPage"
+        component={FourthPage}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function fifthScreenStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="FifthPage"
+    >
+      <Stack.Screen
+        name="FifthPage"
+        component={FifthPage}
+        options={{ title: 'Help' }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator
+        drawerType={'permanent'}
+        drawerStyle={{
+          backgroundColor: '#14142B',
+          width: '12%',
+        }}
+        drawerContentOptions={{
+          activeTintColor: '#e91e63',
+          labelStyle: {color: '#ffffff'},
+          itemStyle: { marginVertical: 5 },
+        }}>
+        <Drawer.Screen
+          name="Home"
+          options={{ drawerLabel: 'Home' }}
+          component={firstScreenStack} />
+        <Drawer.Screen
+          name="List"
+          options={{ drawerLabel: 'List' }}
+          component={secondScreenStack} />
+        <Drawer.Screen
+          name="Map"
+          options={{ drawerLabel: 'Map' }}
+          component={thirdScreenStack} />
+        <Drawer.Screen
+          name="Door"
+          onPress={() => navigation.closeDrawer()}
+          options={{ drawerLabel: 'Door' }}
+          component={fourthScreenStack} />
+        <Drawer.Screen
+          name="Help"
+          options={{ drawerLabel: 'Help' }}
+          component={fifthScreenStack} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
