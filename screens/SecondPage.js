@@ -5,43 +5,50 @@ import {
   Button,
   View,
   Text,
-  SafeAreaView
+  ScrollView,
+  StyleSheet,
 } from 'react-native';
+import { Box, Flex, HStack, Stack, Center, NativeBaseProvider, Container, Heading } from "native-base"
 
 const SecondPage = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1, padding: 16 }}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Text
-            style={{
-              fontSize: 25,
-              textAlign: 'center',
-              marginBottom: 16
-            }}>
-            This is Second Page under Second Page Option
-          </Text>
-          <Button
-            title="Go to First Page"
-            onPress={
-              () => navigation.navigate('FirstPage')
-            }
-          />
-          <Button
-            title="Go to Third Page"
-            onPress={
-              () => navigation.navigate('ThirdPage')
-            }
-          />
-        </View>
+    <ScrollView style={{ flex: 1 }}>
+      <View style={styles.container}>
+          <Box style={styles.nextBox} size={650} bg="white">
+            <Text style={styles.boxHeader}>
+              Who's Next?
+            </Text>
+          </Box>
+          <Box style={styles.nextBox} size={300} bg="white">
+            <Text style={styles.boxHeader}>
+              Map
+            </Text>
+          </Box>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: "1em",
+    backgroundColor: "#F0F4FF",
+    alignItems: "center",
+  },
+  nextBox: {
+    borderRadius: 10,
+    marginTop: "1em",
+    marginBottom: "1em",
+    width: "94%",
+  },
+  boxHeader: {
+    color: "#ADB3D2",
+    fontSize: "1.5em",
+    paddingTop: "0.5em",
+    paddingLeft: "0.5em",
+  },
+});
+
 
 export default SecondPage;

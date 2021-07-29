@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
+import { NativeBaseProvider, Box } from 'native-base';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -97,41 +98,43 @@ function fifthScreenStack({ navigation }) {
 
 function App() {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        drawerType={'permanent'}
-        drawerStyle={{
-          backgroundColor: '#14142B',
-          width: '12%',
-        }}
-        drawerContentOptions={{
-          activeTintColor: '#e91e63',
-          labelStyle: {color: '#ffffff'},
-          itemStyle: { marginVertical: 5 },
-        }}>
-        <Drawer.Screen
-          name="Home"
-          options={{ drawerLabel: 'Home' }}
-          component={firstScreenStack} />
-        <Drawer.Screen
-          name="List"
-          options={{ drawerLabel: 'List' }}
-          component={secondScreenStack} />
-        <Drawer.Screen
-          name="Map"
-          options={{ drawerLabel: 'Map' }}
-          component={thirdScreenStack} />
-        <Drawer.Screen
-          name="Door"
-          onPress={() => navigation.closeDrawer()}
-          options={{ drawerLabel: 'Door' }}
-          component={fourthScreenStack} />
-        <Drawer.Screen
-          name="Help"
-          options={{ drawerLabel: 'Help' }}
-          component={fifthScreenStack} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <NativeBaseProvider>
+      <NavigationContainer>
+        <Drawer.Navigator
+          drawerType={'permanent'}
+          drawerStyle={{
+            backgroundColor: '#14142B',
+            width: '15%',
+          }}
+          drawerContentOptions={{
+            activeTintColor: '#e91e63',
+            labelStyle: {color: '#ffffff'},
+            itemStyle: { marginVertical: 5 },
+          }}>
+          <Drawer.Screen
+            name="Home"
+            options={{ drawerLabel: 'Home' }}
+            component={firstScreenStack} />
+          <Drawer.Screen
+            name="List"
+            options={{ drawerLabel: 'List' }}
+            component={secondScreenStack} />
+          <Drawer.Screen
+            name="Map"
+            options={{ drawerLabel: 'Map' }}
+            component={thirdScreenStack} />
+          <Drawer.Screen
+            name="Door"
+            onPress={() => navigation.closeDrawer()}
+            options={{ drawerLabel: 'Door' }}
+            component={fourthScreenStack} />
+          <Drawer.Screen
+            name="Help"
+            options={{ drawerLabel: 'Help' }}
+            component={fifthScreenStack} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 }
 
